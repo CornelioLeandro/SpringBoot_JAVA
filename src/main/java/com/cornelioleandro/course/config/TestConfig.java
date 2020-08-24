@@ -1,5 +1,6 @@
 package com.cornelioleandro.course.config;
 
+import java.lang.reflect.Array;
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -8,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.cornelioleandro.course.entities.Category;
 import com.cornelioleandro.course.entities.Order;
 import com.cornelioleandro.course.entities.User;
 import com.cornelioleandro.course.entities.enums.OrderStatus;
+import com.cornelioleandro.course.repositories.CategoryRepository;
 import com.cornelioleandro.course.repositories.OrderRepository;
 import com.cornelioleandro.course.repositories.UserRepository;
 
@@ -23,9 +26,16 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
 		
 		User u1= new User(null, "Leandro Cornelio", "cornelio@gmail.com", "981301912","125874");
 		User u2= new User(null, "Clber Cornelio", "clber@gmail.com", "981301912","125874");
@@ -36,6 +46,9 @@ public class TestConfig implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+		
+	
 	}
 	
 	
